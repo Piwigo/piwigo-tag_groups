@@ -1,0 +1,1 @@
+Ajoute un bouton Google "+1"
