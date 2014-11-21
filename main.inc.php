@@ -105,9 +105,8 @@ function tg_groups_display()
       // new group?
       if ($tag['group'] !== $current_tag_group)
       {
-        // if ($current_column < $conf['tag_letters_column_number']
-        //     and $current_tag_idx > $current_column*$nb_tags/$conf['tag_letters_column_number'] )
-        if (true)
+        if ($current_column < $conf['tag_letters_column_number']
+            and $current_tag_idx > $current_column*$nb_tags/$conf['tag_letters_column_number'] )
         {
           $tag_group['CHANGE_COLUMN'] = true;
           $current_column++;
