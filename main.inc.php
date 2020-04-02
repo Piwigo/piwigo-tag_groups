@@ -1,12 +1,19 @@
 <?php
 /*
 Plugin Name: Tag Groups
-Version: auto
+Version: 2.8.0
 Description: Create groups of tags
-Plugin URI: http://piwigo.org/ext/extension_view.php?eid=
+Plugin URI: http://piwigo.org/ext/extension_view.php?eid=781
 Author: plg
 Author URI: http://piwigo.org
 */
+
+// characters to separate group with
+global $tag_group_sep;
+$tag_group_sep=":/";
+// show tags which have no group in their own group?
+global $tag_group_hide_nogroup;
+$tag_group_hide_nogroup = true;
 
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
@@ -42,7 +49,9 @@ if ($render_tag_names)
 
 function tg_clean_tag_name($tag_name)
 {
-  return preg_replace('/^[^:]*:/', '', $tag_name);
+  global $tag_group_sep;
+  $pattern='/^[^'.preg_quote($tag_group_sep,'/').']*'.preg_quote($tag_group_sep,'/').'/';
+  return preg_replace($pattern, '', $tag_name);
 }
 
 // file_get_contents('tags.tpl')
@@ -55,6 +64,7 @@ if (script_basename() == 'tags')
 function tg_groups_display()
 {
   global $conf, $template, $user, $tags, $page;
+  global $tag_group_sep, $tag_group_hide_nogroup;
 
   load_language('plugin.lang', PHPWG_PLUGINS_PATH . basename(dirname(__FILE__)) . '/');
   load_language('lang', PHPWG_ROOT_PATH.PWG_LOCAL_DIR, array('no_fallback'=>true, 'local'=>true) );
@@ -84,15 +94,24 @@ function tg_groups_display()
     
     foreach ($tags as $tag)
     {
-      // if the tag belongs to no group, we don't show it on the "tag by
-      // group" display mode
-      if (strpos($tag['name'], ':') === false)
+      // any group present?
+      if (preg_match("/[".preg_quote($tag_group_sep,"/")."]/", $tag['name']) < 1)
       {
-        continue;
+        if ($tag_group_hide_nogroup)
+        {
+          // if the tag belongs to no group, we don't show it on the "tag by
+          // group" display mode
+          continue;
+        }
+        else
+        {
+            // no group specified so name = group
+            $tag['group']=$tag['name'];
+        }
       }
       else
       {
-        list($tag['group'], $tag['name']) = explode(':', $tag['name'], 2);
+        list($tag['group'], $tag['name']) = preg_split("/[".preg_quote($tag_group_sep,"/")."]+/", $tag['name'], 2);
         $tag['group'] = preg_replace('/^[^=]*=/', '', $tag['group']);
       }
 
@@ -203,7 +222,7 @@ function tg_index_groups_display()
   $is_tag_group_selection = true;
   foreach ($page['tags'] as $tag)
   {
-    if (!preg_match('/:/', $tag['name']))
+    if (preg_match("/[".preg_quote($tag_group_sep,"/")."]/", $tag['name']) < 1)
     {
       $is_tag_group_selection = false;
     }
@@ -255,7 +274,7 @@ SELECT
   $tag_groups = array();
   foreach ($tags as $id => $tag)
   {
-    list($group, $name) = explode(':', $tag['name'], 2);
+    list($group, $name) = preg_split("/[".preg_quote($tag_group_sep,"/")."]+/", $tag['name'], 2);
 
     if (!isset($tag_groups[$group]))
     {
