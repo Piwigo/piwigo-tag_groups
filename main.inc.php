@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Tag Groups
-Version: 2.8.0
+Version: auto
 Description: Create groups of tags
-Plugin URI: http://piwigo.org/ext/extension_view.php?eid=781
+Plugin URI: http://piwigo.org/ext/extension_view.php?eid=
 Author: plg
 Author URI: http://piwigo.org
 */
