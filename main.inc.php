@@ -210,6 +210,7 @@ function tg_index_groups_display()
     else
     {
       list($group, $name) = explode(':', $tag['name'], 2);
+      $group = preg_replace('/^[^=]*=/', '', $group);
       $current_tag_groups[$group] = $tag['id'];
     }
   }
@@ -256,6 +257,7 @@ SELECT
   foreach ($tags as $id => $tag)
   {
     list($group, $name) = explode(':', $tag['name'], 2);
+    $group = preg_replace('/^[^=]*=/', '', $group);
 
     if (!isset($tag_groups[$group]))
     {
