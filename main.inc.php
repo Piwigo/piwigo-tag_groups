@@ -37,7 +37,9 @@ if (script_basename() == 'tags')
 
 if ($render_tag_names)
 {
-  add_event_handler('render_tag_name', 'tg_clean_tag_name');
+  // due to the change of the way tags are loaded in admin (via API and/or stored in LocalStorage),
+  // we don't really know when we're in admin, so it's better to not "render" (ie remove group name)
+  // add_event_handler('render_tag_name', 'tg_clean_tag_name');
 }
 
 function tg_clean_tag_name($tag_name)
@@ -203,6 +205,7 @@ function tg_index_groups_display()
   $is_tag_group_selection = true;
   foreach ($page['tags'] as $tag)
   {
+    $tag['name'] = trigger_change('render_tag_name', $tag['name'], $tag);
     if (!preg_match('/:/', $tag['name']))
     {
       $is_tag_group_selection = false;
@@ -256,6 +259,7 @@ SELECT
   $tag_groups = array();
   foreach ($tags as $id => $tag)
   {
+    $tag['name'] = trigger_change('render_tag_name', $tag['name'], $tag);
     list($group, $name) = explode(':', $tag['name'], 2);
     $group = preg_replace('/^[^=]*=/', '', $group);
 
