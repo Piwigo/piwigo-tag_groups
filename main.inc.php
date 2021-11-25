@@ -157,7 +157,7 @@ function tg_groups_display()
   }
 }
 
-function tg_groups_display_prefilter($content, &$smarty)
+function tg_groups_display_prefilter($content)
 {
   $template_content = file_get_contents(PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)).'/tags.tpl');
   
@@ -167,7 +167,7 @@ function tg_groups_display_prefilter($content, &$smarty)
   return preg_replace($search, $replace, $content);
 }
 
-function tg_add_display_link_prefilter($content, &$smarty)
+function tg_add_display_link_prefilter($content)
 {
   $search = '#\{if \$display_mode == \'letters\'\}\s*<li>#mi';
   $replace = '{if $display_mode != \'cloud\'}<li>';
