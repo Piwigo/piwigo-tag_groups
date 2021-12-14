@@ -304,18 +304,52 @@ SELECT
     if ($only_this_group_selected)
     {
       $disabled = '';
+      if (isset($conf['tag_groups_dynamic_filters']) && $conf['tag_groups_dynamic_filters']) 
+      {
+        // We want dynamic here
+        $tag_groups[$group][$id] = array(
+          'name' => $name,
+          'value' => $value,
+          'selected' => (in_array($id, $page['tag_ids']) ? 'selected' : ''),
+        );
+      }
     }
     elseif (isset($other_group_tags_related_tag_ids[$id]))
     {
       $disabled = '';
+      if (isset($conf['tag_groups_dynamic_filters']) && $conf['tag_groups_dynamic_filters']) 
+      {
+        // We want dynamic here
+        $tag_groups[$group][$id] = array(
+          'name' => $name,
+          'value' => $value,
+          'selected' => (in_array($id, $page['tag_ids']) ? 'selected' : ''),
+        );
+      }
     }
 
-    $tag_groups[$group][$id] = array(
-      'name' => $name,
-      'value' => $value,
-      'selected' => (in_array($id, $page['tag_ids']) ? 'selected' : ''),
-      'disabled' => $disabled,
-    );
+    if (!(isset($conf['tag_groups_dynamic_filters']) && $conf['tag_groups_dynamic_filters'])) 
+    {
+      // We don't want dynamic here
+      $tag_groups[$group][$id] = array(
+        'name' => $name,
+        'value' => $value,
+        'selected' => (in_array($id, $page['tag_ids']) ? 'selected' : ''),
+        'disabled' => $disabled,
+      );
+    }
+  }
+
+  if (isset($conf['tag_groups_dynamic_filters']) && $conf['tag_groups_dynamic_filters']) 
+  {
+    // We want dynamic here
+    foreach ($tag_groups as $group_name => $id) 
+    {
+      if (1 == count($tag_groups[$group_name])) 
+      {
+        unset($tag_groups[$group_name]);
+      }
+    }
   }
 
   $template->assign('tag_groups', $tag_groups);
