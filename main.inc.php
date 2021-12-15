@@ -304,33 +304,15 @@ SELECT
     if ($only_this_group_selected)
     {
       $disabled = '';
-      if (isset($conf['tag_groups_dynamic_filters']) && $conf['tag_groups_dynamic_filters']) 
-      {
-        // We want dynamic here
-        $tag_groups[$group][$id] = array(
-          'name' => $name,
-          'value' => $value,
-          'selected' => (in_array($id, $page['tag_ids']) ? 'selected' : ''),
-        );
-      }
     }
     elseif (isset($other_group_tags_related_tag_ids[$id]))
     {
       $disabled = '';
-      if (isset($conf['tag_groups_dynamic_filters']) && $conf['tag_groups_dynamic_filters']) 
-      {
-        // We want dynamic here
-        $tag_groups[$group][$id] = array(
-          'name' => $name,
-          'value' => $value,
-          'selected' => (in_array($id, $page['tag_ids']) ? 'selected' : ''),
-        );
-      }
     }
 
-    if (!(isset($conf['tag_groups_dynamic_filters']) && $conf['tag_groups_dynamic_filters'])) 
+    if ('' == $disabled or !conf_get_param('tag_groups_dynamic_filters', false))
     {
-      // We don't want dynamic here
+      // When dynamic filters enabled, we only want usable tags and skip the disabled
       $tag_groups[$group][$id] = array(
         'name' => $name,
         'value' => $value,
@@ -340,12 +322,11 @@ SELECT
     }
   }
 
-  if (isset($conf['tag_groups_dynamic_filters']) && $conf['tag_groups_dynamic_filters']) 
+  if (conf_get_param('tag_groups_dynamic_filters', false))
   {
-    // We want dynamic here
-    foreach ($tag_groups as $group_name => $id) 
+    foreach ($tag_groups as $group_name => $tags)
     {
-      if (1 == count($tag_groups[$group_name])) 
+      if (1 == count($tags))
       {
         unset($tag_groups[$group_name]);
       }
