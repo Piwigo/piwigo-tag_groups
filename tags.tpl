@@ -8,7 +8,8 @@
     <table class="tagLetterContent">
       {foreach from=$tag_group.tags item=tag}
       <tr class="tagLine">
-        <td><a href="{$tag.URL}" title="{$tag.name}">{$tag.name}</a> [{$tag.counter}]</td>
+        <td><a href="{$tag.URL}" title="{$tag.name}">{$tag.name}</a></td>
+        <td class="nbEntries">{$tag.counter|@translate_dec:'%d photo':'%d photos'}</td>
       </tr>
       {/foreach}
     </table>
