@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
       {$tag_group_name}
       <select>
   {foreach from=$tags key=tag_id item=tag}
-        <option value="{$tag.value}" {$tag.selected} {$tag.disabled}>{$tag.name}</option>
+        <option value="{$tag.value}" {$tag.selected|default:null} {$tag.disabled|default:null}>{$tag.name}</option>
   {/foreach}
       </select>
     </span>
