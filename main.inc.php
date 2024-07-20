@@ -357,10 +357,35 @@ function tg_get_other_groups_related_tag_ids($current_tag_groups, $group)
 {
   global $page;
 
-  if (!isset($page[__FUNCTION__.'_cache'][$group]))
+  // Let's say you have 3 groups {activity, city, orientation} and following tags:
+  //
+  // activity:sport #1 <= currently selected
+  // activity:industry #2
+  // city:London #3
+  // city:Paris #4 <= currently selected
+  // city:Madrid #5
+  // orientation:landscape #6
+  // orientation:portrait #7
+  //
+  // The $current_tag_groups is array('activity'=>1, 'city'=>4)
+  //
+  // There are 2 kind of situations:
+  //
+  // 1) you ask for a group which is not currently selected (orientation in our
+  //    example) and we must simply find all tags related to tags {1,4}
+  //
+  // 2) you ask for a group which is already selected (activity or city) and we
+  //    must exclude the tag of this group before searching for related tags. We
+  //    do this because if there are photos tagged "activity:sport" and
+  //    "city:London" we want to let the user switch to "city:London"
+
+  $other_group_tags = $current_tag_groups;
+  unset($other_group_tags[$group]);
+  asort($other_group_tags);
+  $cache_key = implode('~', array_values($other_group_tags));
+
+  if (!isset($page[__FUNCTION__.'_cache'][$cache_key]))
   {
-    $other_group_tags = $current_tag_groups;
-    unset($other_group_tags[$group]);
     $other_group_tags_items = get_image_ids_for_tags($other_group_tags);
     $other_group_tags_related_tags = get_common_tags($other_group_tags_items, 0, $other_group_tags);
     $other_group_tags_related_tag_ids = array();
@@ -369,9 +394,9 @@ function tg_get_other_groups_related_tag_ids($current_tag_groups, $group)
       $other_group_tags_related_tag_ids[ $tag['id'] ] = 1;
     }
 
-    @$page[__FUNCTION__.'_cache'][$group] = $other_group_tags_related_tag_ids;
+    @$page[__FUNCTION__.'_cache'][$cache_key] = $other_group_tags_related_tag_ids;
   }
 
-  return $page[__FUNCTION__.'_cache'][$group];
+  return $page[__FUNCTION__.'_cache'][$cache_key];
 }
 ?>
