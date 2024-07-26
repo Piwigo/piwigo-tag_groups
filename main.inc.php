@@ -159,7 +159,16 @@ function tg_groups_display()
 
 function tg_groups_display_prefilter($content)
 {
-  $template_content = file_get_contents(PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)).'/tags.tpl');
+  global $user;
+
+  if('bootstrap_darkroom' != $user['theme'])
+  {
+    $template_content = file_get_contents(PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)).'/tags.tpl');
+  }
+  else
+  {
+    $template_content = file_get_contents(PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)).'/tags_bdrkm.tpl');
+  }
   
   $search = '#\{/if\}((\s*</div>\s*)+)<!-- content -->#mi';
   $replace = '{/if}'."\n".$template_content.'\1 <!-- content -->';
