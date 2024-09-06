@@ -68,6 +68,8 @@ function tg_groups_display()
   if ($page['tg_display'])
   {
     // echo __FILE__.'::'.__LINE__.' display_mode=groups<br>';
+    $template->assign('tg_items_to_display', isset($conf['tg_items_to_display']) ? $conf['tg_items_to_display'] : 10);
+
     $template->set_prefilter('tags', 'tg_groups_display_prefilter');
 
     $template->assign('display_mode', 'groups');
