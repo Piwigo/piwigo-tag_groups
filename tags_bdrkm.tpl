@@ -3,7 +3,7 @@
   {* <div class="card-deck"> *}
   {foreach from=$tag_groups item=tag_group}
     {assign var="hidden" value=false}
-    <div class="tg_{$tag_group.TITLE}">
+    <div class="tg_{preg_replace('/\s+/', '_', $tag_group.TITLE)}">
       <div class="card mb-3 tagGroup align-self-stretch">
         <div class="card-header tagLetter">
           {$tag_group.TITLE}
@@ -12,9 +12,9 @@
         {* <div class=" card-body list-group list-group-flush"> *}
       {if isset($tg_items_to_display)}
         {foreach from=$tag_group.tags item=tag name=counter}
-          {if $smarty.foreach.counter.iteration < $tg_items_to_display}
+          {if $smarty.foreach.counter.iteration <= $tg_items_to_display}
           <a href="{$tag.URL}" class="list-group-item list-group-item-action visible" title="{$tag.name}">{$tag.name}<span class="badge badge-secondary ml-2">{$tag.counter} photo</span></a>
-          {elseif $smarty.foreach.counter.iteration > 5}
+          {elseif $smarty.foreach.counter.iteration > $tg_items_to_display}
           {$hidden = true}
           <a href="{$tag.URL}" class="list-group-item list-group-item-action hiddenGroups hide" title="{$tag.name}">{$tag.name}<span class="badge badge-secondary ml-2">{$tag.counter} photo</span></a>
           {/if}
@@ -26,8 +26,8 @@
         </div>
       {if $hidden == true}
         <div class="card-footer">
-          <span id="tg_see_more" class="show" onclick="tg_toggle_groups('{$tag_group.TITLE}','show')">{"See more"|translate}</span>
-          <span id="tg_hide" class="hide" onclick="tg_toggle_groups('{$tag_group.TITLE}','hide')">{"Hide"|translate}</span>
+          <span id="tg_see_more" class="show" onclick="tg_toggle_groups('{preg_replace('/\s+/', '_', $tag_group.TITLE)}','show')">{"See more"|translate}</span>
+          <span id="tg_hide" class="hide" onclick="tg_toggle_groups('{preg_replace('/\s+/', '_', $tag_group.TITLE)}','hide')">{"Hide"|translate}</span>
         </div>
       {/if}
       </div>
