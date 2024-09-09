@@ -3,7 +3,7 @@
   {* <div class="card-deck"> *}
   {foreach from=$tag_groups item=tag_group}
     {assign var="hidden" value=false}
-    <div class="tg_{preg_replace('/\s+/', '_', $tag_group.TITLE)}">
+    <div class="tg_{$tag_group.ID}">
       <div class="card mb-3 tagGroup align-self-stretch">
         <div class="card-header tagLetter">
           {$tag_group.TITLE}
@@ -26,8 +26,8 @@
         </div>
       {if $hidden == true}
         <div class="card-footer">
-          <span id="tg_see_more" class="show" onclick="tg_toggle_groups('{preg_replace('/\s+/', '_', $tag_group.TITLE)}','show')">{"See more"|translate}</span>
-          <span id="tg_hide" class="hide" onclick="tg_toggle_groups('{preg_replace('/\s+/', '_', $tag_group.TITLE)}','hide')">{"Hide"|translate}</span>
+          <span id="tg_see_more" class="show" onclick="tg_toggle_groups('{$tag_group.ID}','show')">{"See more"|translate}</span>
+          <span id="tg_hide" class="hide" onclick="tg_toggle_groups('{$tag_group.ID}','hide')">{"Hide"|translate}</span>
         </div>
       {/if}
       </div>

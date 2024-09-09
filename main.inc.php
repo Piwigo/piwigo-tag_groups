@@ -128,7 +128,9 @@ function tg_groups_display()
           'tags' => array()
           );
       }
-      
+
+      $tag_group['ID'] = $tag['id'];
+
       array_push(
         $tag_group['tags'],
         array_merge(
