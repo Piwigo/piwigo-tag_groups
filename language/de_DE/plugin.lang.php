@@ -21,3 +21,5 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['show tag groups'] = 'Zeige Schlagwortgruppen';
+$lang['Hide'] = 'Ausblenden';
+$lang['See more'] = 'Mehr sehen';
