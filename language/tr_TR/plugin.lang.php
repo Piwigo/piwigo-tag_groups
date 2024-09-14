@@ -21,3 +21,5 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['show tag groups'] = 'etiket grubunu göster';
+$lang['Hide'] = 'Gizle';
+$lang['See more'] = 'Daha fazlasını gör';
