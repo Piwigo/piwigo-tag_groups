@@ -6,3 +6,5 @@
 // | file that was distributed with this source code.                      |
 // +-----------------------------------------------------------------------+
 $lang['show tag groups'] = 'sýna merkjahópa';
+$lang['Hide'] = 'Fela';
+$lang['See more'] = 'Sjá meira';
