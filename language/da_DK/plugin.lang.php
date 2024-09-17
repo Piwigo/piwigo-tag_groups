@@ -21,3 +21,5 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['show tag groups'] = 'vis taggrupper';
+$lang['Hide'] = 'Skjul';
+$lang['See more'] = 'Se mere';
