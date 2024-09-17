@@ -21,3 +21,5 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['show tag groups'] = 'Näytä tunnisteryhmät';
+$lang['Hide'] = 'Piilota';
+$lang['See more'] = 'Katso lisää';
