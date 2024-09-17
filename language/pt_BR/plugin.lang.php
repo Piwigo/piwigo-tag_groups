@@ -21,3 +21,5 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['show tag groups'] = 'mostrar grupos de etiquetas';
+$lang['Hide'] = 'Esconder';
+$lang['See more'] = 'Ver mais';
