@@ -21,3 +21,5 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['show tag groups'] = 'Mostra grup d\'etiquetes';
+$lang['Hide'] = 'Amaga';
+$lang['See more'] = 'Mostra més';
