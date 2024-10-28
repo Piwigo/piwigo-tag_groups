@@ -21,3 +21,5 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['show tag groups'] = 'Toon label-groepen';
+$lang['Hide'] = 'Verberg';
+$lang['See more'] = 'Toon meer';
