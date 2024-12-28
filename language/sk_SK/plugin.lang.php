@@ -21,3 +21,5 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['show tag groups'] = 'zobraziť skupiny kľúčových slov';
+$lang['Hide'] = 'Skryť';
+$lang['See more'] = 'Zobraziť viac';
