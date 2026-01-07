@@ -21,3 +21,5 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['show tag groups'] = 'cimke csoportok mutatása';
+$lang['See more'] = 'További információk';
+$lang['Hide'] = 'Elrejtés';
