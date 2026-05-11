@@ -88,10 +88,10 @@ function tg_groups_display()
     
     foreach ($tags as $tag)
     {
-      // if the tag belongs to no group, we don't show it on the "tag by
       // group" display mode
       if (strpos($tag['name'], ':') === false)
       {
+        $tags_without_groups[] = $tag;
         continue;
       }
       else
@@ -157,6 +157,37 @@ function tg_groups_display()
         'tag_groups',
         $tag_group
         );
+    }
+    // Create a group for tags without groups
+    if (count($tags_without_groups) > 0)
+    {
+      $tag_group = array(
+        'TITLE' => l10n('Ungrouped tags'),
+        'tags' => array()
+      );
+
+      foreach ($tags_without_groups as $tag)
+      {
+        $tag_group['ID'] = $tag['id'];
+        array_push(
+          $tag_group['tags'],
+          array_merge(
+            $tag,
+            array(
+              'URL' => make_index_url(
+                array(
+                  'tags' => array($tag),
+                )
+              ),
+            )
+          )
+        );
+      }
+
+      $template->append(
+        'tag_groups',
+        $tag_group
+      );
     }
   }
 }
