@@ -3,6 +3,8 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
 function tg_init()
 {
+  global $template;
+
   $render_tag_names = true;
   if (defined('IN_ADMIN'))
   {
@@ -30,6 +32,10 @@ function tg_init()
 
   load_language('plugin.lang', TG_PATH);
   load_language('lang', PHPWG_ROOT_PATH.PWG_LOCAL_DIR, array('no_fallback'=>true, 'local'=>true) );
+
+  $template->assign(array(
+    'TG_PATH' => TG_PATH,
+  ));
 }
 
 function tg_groups_display()
@@ -336,4 +342,55 @@ function tg_get_other_groups_related_tag_ids($current_tag_groups, $group)
   }
 
   return $page[__FUNCTION__.'_cache'][$cache_key];
+}
+
+function tg_loc_end_picture()
+{
+  global $conf, $tags, $template;
+  if (count($tags) === 0) return; // if no tags do nothing
+
+  $display_info = safe_unserialize($conf['picture_informations']);
+  if (!$display_info['tags']) return; // if showing tag in galery is disabled
+  if (!isset($conf['tag_groups_show_as_field']) or !$conf['tag_groups_show_as_field']) return; // is doesnt have conf in LocalFilesEditor
+
+  $related_tg_groups = [];
+  $related_tags = [];
+
+  foreach($tags as $tag)
+  {
+    $tag_group = tg_get_tag_groups_selection($tag);
+    $new_tag = array_merge(
+      $tag,
+      [
+        'URL' =>  make_index_url( array('tags' => array($tag)) ),
+        'U_TAG_IMAGE' => duplicate_picture_url(array(
+          'section' => 'tags',
+          'tags' => array($tag)
+        )),
+        'tag_name' => explode(':', $tag['name'], 2)[1] ?? null,
+      ],
+    );
+
+    if (null === $tag_group)
+    {
+      $related_tags[] = $new_tag;
+      continue;
+    }
+
+    $related_tg_groups[$tag_group['prefix']][] = $new_tag;
+  }
+
+  // override core `related_tags` without tag_groups
+  $template->assign('related_tags', $related_tags);
+
+  // only the groups present on this photo, in abc order
+  ksort($related_tg_groups, SORT_STRING);
+
+  $template->assign('TG', array(
+    'groups'  => array_keys($related_tg_groups),
+    'related_tg_groups' => $related_tg_groups,
+    'count_tags' => count($related_tags),
+  ));
+  $template->set_filename('tg_picture', TG_PATH.'/template/picture.tpl');
+  $template->parse('tg_picture');
 }

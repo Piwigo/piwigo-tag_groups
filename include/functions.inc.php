@@ -58,3 +58,42 @@ function tg_make_tag_group_url($selected_tag_ids, $available_tags)
 
   return make_index_url(array('section'=>'tags', 'tags'=>$tags));
 }
+
+function tg_get_tag_groups_fields()
+{
+  $query = '
+SELECT
+    id,
+    name
+  FROM '.TAGS_TABLE.'
+  WHERE name LIKE \'%:%\'
+  ORDER BY name
+;';
+  $result = pwg_query($query);
+
+  $tg_groups = array();
+  while ($row = pwg_db_fetch_assoc($result))
+  {
+    $prefix = explode(':', $row['name'], 2)[0];
+    $tg_groups[$prefix] = true;
+  }
+  $tg_groups = array_keys($tg_groups);
+  sort($tg_groups);
+
+  return $tg_groups;
+}
+
+function tg_get_tag_groups_selection(array $tag)
+{
+  if (strpos($tag['name'], ':') === false)
+  {
+    return null; // this tag is not a tag_groups
+  }
+
+  $prefix = explode(':', $tag['name'], 2)[0]; // country:France => country
+  return [
+    'prefix' => $prefix,
+    'id' => $tag['id'],
+    'name' => $tag['name'],
+  ]; 
+}
