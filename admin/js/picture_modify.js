@@ -1,14 +1,15 @@
 $(function() {
   const $tag_area = $('[data-selectize="tags"]').first().closest('p');
 
+  const groups = TG.groups.map((label, i) => ({ label: label, id: 'tg-' + i }));
+
   let html = '';
-  TG.groups.forEach((label) => {
-    const id = label.toLowerCase();
+  groups.forEach(({ label, id }) => {
     html += `
     <p class="tg-container">
       <strong>${label}</strong>
       <br>
-      <select id="tg-${id}" name="tags[]" data-value='${JSON.stringify(TG.tg_selection[label]) ?? null}'
+      <select id="${id}" name="tags[]" data-value='${JSON.stringify(TG.tg_selection[label]) ?? null}'
         multiple placeholder="${tg_search_str}" style="width:calc(100% + 2px);"></select>
     </p>`;
   });
@@ -20,20 +21,20 @@ $(function() {
     rootUrl: TG.rootUrl,
   });
 
-  TG.groups.forEach(function(group) {
+  groups.forEach(function({ label, id }) {
     tgTagsCache.get(function(data) {
-      var options = tg_group_filter(group)(data);
+      var options = tg_group_filter(label)(data);
 
-      $('#tg-' + group).selectize({
+      $('#' + id).selectize({
         valueField: 'id',
         labelField: 'name',
         sortField: 'name',
         searchField: ['name'],
         plugins: ['remove_button'],
         options: options,
-        items: (TG.tg_selection[group] ?? []).map(t => t.id ?? t),
+        items: (TG.tg_selection[label] ?? []).map(t => t.id ?? t),
         create: function(input, callback) {
-          callback({ id: group + ':' + input, name: input });
+          callback({ id: label + ':' + input, name: input });
         },
       });
     });
