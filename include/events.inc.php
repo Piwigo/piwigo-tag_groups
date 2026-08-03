@@ -3,7 +3,9 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
 function tg_init()
 {
-  global $template;
+  global $template, $conf;
+
+  $conf['tag_groups'] = safe_unserialize($conf['tag_groups']);
 
   $render_tag_names = true;
   if (defined('IN_ADMIN'))
@@ -41,10 +43,7 @@ function tg_init()
 function tg_groups_display()
 {
   if (script_basename() != 'tags') return;
-  global $conf, $template, $user, $tags, $page;
-
-  // load_language('plugin.lang', PHPWG_PLUGINS_PATH . basename(dirname(__FILE__)) . '/');
-  // load_language('lang', PHPWG_ROOT_PATH.PWG_LOCAL_DIR, array('no_fallback'=>true, 'local'=>true) );
+  global $conf, $template, $tags, $page;
 
   $template->set_prefilter('tags', 'tg_add_display_link_prefilter');
 
@@ -150,7 +149,7 @@ function tg_index_groups_display()
 {
   global $template, $page, $conf;
 
-  if (!isset($conf['tag_groups_index_filters']) or !$conf['tag_groups_index_filters'])
+  if (!$conf['tag_groups']['index_filters'])
   {
     return;
   }
@@ -351,7 +350,7 @@ function tg_loc_end_picture()
 
   $display_info = safe_unserialize($conf['picture_informations']);
   if (!$display_info['tags']) return; // if showing tag in galery is disabled
-  if (!isset($conf['tag_groups_show_as_field']) or !$conf['tag_groups_show_as_field']) return; // is doesnt have conf in LocalFilesEditor
+  if (!$conf['tag_groups']['show_as_field']) return; // is doesnt have conf in LocalFilesEditor
 
   $related_tg_groups = [];
   $related_tags = [];

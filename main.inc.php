@@ -6,6 +6,7 @@ Description: Create groups of tags
 Plugin URI: http://piwigo.org/ext/extension_view.php?eid=
 Author: plg
 Author URI: http://piwigo.org
+Has Settings: true
 */
 
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
@@ -29,6 +30,7 @@ if (basename(dirname(__FILE__)) != 'tag_groups')
 define('TG_ID', basename(dirname(__FILE__)));
 define('TG_PATH', PHPWG_PLUGINS_PATH . TG_ID . '/');
 define('TG_REALPATH', realpath(TG_PATH));
+define('TG_ADMIN', get_root_url() . 'admin.php?page=plugin-' . TG_ID);
 
 // +-----------------------------------------------------------------------+
 // | Init Piwigo Tag Groups                                                |
@@ -37,6 +39,7 @@ define('TG_REALPATH', realpath(TG_PATH));
 include_once(TG_PATH . 'include/functions.inc.php');
 
 $events_functions = TG_PATH.'include/events.inc.php';
+$ws_functions = TG_PATH.'include/ws_functions.inc.php';
 
 // if ($render_tag_names)
 // {
@@ -49,6 +52,7 @@ add_event_handler('init', 'tg_init', EVENT_HANDLER_PRIORITY_NEUTRAL, $events_fun
 add_event_handler('loc_begin_page_header', 'tg_groups_display', EVENT_HANDLER_PRIORITY_NEUTRAL, $events_functions);
 add_event_handler('loc_end_index', 'tg_index_groups_display', EVENT_HANDLER_PRIORITY_NEUTRAL, $events_functions);
 add_event_handler('loc_end_picture', 'tg_loc_end_picture', EVENT_HANDLER_PRIORITY_NEUTRAL, $events_functions);
+add_event_handler('ws_add_methods', 'tg_add_methods', EVENT_HANDLER_PRIORITY_NEUTRAL, $ws_functions);
 
 if (defined('IN_ADMIN'))
 {

@@ -5,7 +5,7 @@ function tg_loc_end_picture_modify()
 {
   global $template, $conf, $tag_selection;
 
-  if (!isset($conf['tag_groups_show_as_field']) or !$conf['tag_groups_show_as_field'])
+  if (!$conf['tag_groups']['show_as_field'])
   {
     return;
   }

@@ -1,0 +1,68 @@
+.tg-container {
+  margin: 20px;
+  margin-bottom: 70px;
+}
+
+.tg-config {
+  text-align: start;
+  font-size: 14px;
+}
+
+.tg-icon-header .tg-icon {
+  border-radius: 9999px;
+  padding: 10px;
+  font-size: 2em;
+}
+
+.tg-config .tg-icon,
+.tg-icon-text {
+  font-size: 14px;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.tg-config-method {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tg-method {
+  margin-top: 10px;
+}
+
+/* the three badges are revealed one at a time by tg_config.js */
+#tg_unsaved_changes,
+#tg_saving_changes,
+#tg_error_changes {
+  display: none;
+}
+
+.tg-save {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  border-top: 1px solid #ececec;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  background-color: white;
+  align-items: center;
+}
+
+.tg-save .badge-container {
+  margin-right: 0;
+}
+
+/* without this the admin content keeps a min height that leaves a gap
+   above the fixed save bar */
+#content {
+  min-height: auto;
+}
+
+.dark.tg-save {
+  background-color: #444;
+  border-color: rgba(0, 0, 0, 0.2);
+}
