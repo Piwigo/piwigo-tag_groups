@@ -8,3 +8,6 @@
 $lang['show tag groups'] = 'sýna merkjahópa';
 $lang['Hide'] = 'Fela';
 $lang['See more'] = 'Sjá meira';
+$lang['Show tag groups as separate fields'] = 'Sýna merkjahópa sem aðskilda reiti';
+$lang['Show group filters on the tags page'] = 'Sýna hópsíur á merkjasíðunni';
+$lang['General'] = 'Almennt';
