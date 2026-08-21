@@ -23,3 +23,6 @@
 $lang['show tag groups'] = '顯示標籤組';
 $lang['Hide'] = '隱藏';
 $lang['See more'] = '查看更多';
+$lang['General'] = '一般設定';
+$lang['Show group filters on the tags page'] = '在標籤頁面顯示群組篩選條件';
+$lang['Show tag groups as separate fields'] = '在分別欄位顯示標籤群組';
