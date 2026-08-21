@@ -23,3 +23,6 @@
 $lang['show tag groups'] = 'mostrar grupos de etiquetas';
 $lang['Hide'] = 'Esconder';
 $lang['See more'] = 'Ver mais';
+$lang['General'] = 'Em geral';
+$lang['Show group filters on the tags page'] = 'Exibir filtros de grupo na página de tags';
+$lang['Show tag groups as separate fields'] = 'Exibir grupos de tags como campos separados';
