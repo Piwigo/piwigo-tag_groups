@@ -23,3 +23,6 @@
 $lang['show tag groups'] = 'Mostra grup d\'etiquetes';
 $lang['Hide'] = 'Amaga';
 $lang['See more'] = 'Mostra més';
+$lang['General'] = 'General';
+$lang['Show group filters on the tags page'] = 'Mostra els filtres de grup a la pàgina d\'etiquetes';
+$lang['Show tag groups as separate fields'] = 'Mostra els grups d\'etiquetes com a camps separats';
