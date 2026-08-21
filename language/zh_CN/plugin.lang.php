@@ -23,3 +23,6 @@
 $lang['show tag groups'] = '显示标签组';
 $lang['Hide'] = '隐藏';
 $lang['See more'] = '查看更多';
+$lang['General'] = '常规';
+$lang['Show group filters on the tags page'] = '在标签页面显示分组筛选器';
+$lang['Show tag groups as separate fields'] = '将标签分组显示为独立字段';
