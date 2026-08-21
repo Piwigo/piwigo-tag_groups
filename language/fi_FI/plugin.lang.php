@@ -23,3 +23,6 @@
 $lang['show tag groups'] = 'Näytä tunnisteryhmät';
 $lang['Hide'] = 'Piilota';
 $lang['See more'] = 'Katso lisää';
+$lang['General'] = 'Yleinen';
+$lang['Show group filters on the tags page'] = 'Näytä ryhmäsuodattimet tagisivulla';
+$lang['Show tag groups as separate fields'] = 'Näytä tagiryhmät erillisinä kenttinä';
