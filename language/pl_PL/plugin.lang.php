@@ -20,6 +20,9 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-$lang['show tag groups'] = 'pokaż tagi grup';
+$lang['show tag groups'] = 'pokaż grupy tagów';
 $lang['Hide'] = 'Ukryj';
 $lang['See more'] = 'Zobacz więcej';
+$lang['General'] = 'Ogólne';
+$lang['Show group filters on the tags page'] = 'Pokaż filtry grup na stronie tagów';
+$lang['Show tag groups as separate fields'] = 'Pokaż grupy tagów jako oddzielne pola';
