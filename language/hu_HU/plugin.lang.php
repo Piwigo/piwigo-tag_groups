@@ -23,3 +23,6 @@
 $lang['show tag groups'] = 'cimke csoportok mutatása';
 $lang['See more'] = 'További információk';
 $lang['Hide'] = 'Elrejtés';
+$lang['Show tag groups as separate fields'] = 'Címkecsoportok külön mezőként való megjelenítése';
+$lang['Show group filters on the tags page'] = 'Csoportszűrők megjelenítése a címkéknél';
+$lang['General'] = 'Általános';
