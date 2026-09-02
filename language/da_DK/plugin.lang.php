@@ -23,3 +23,6 @@
 $lang['show tag groups'] = 'vis taggrupper';
 $lang['Hide'] = 'Skjul';
 $lang['See more'] = 'Se mere';
+$lang['General'] = 'Generelt';
+$lang['Show group filters on the tags page'] = 'Vis gruppefiltre på tagssiden';
+$lang['Show tag groups as separate fields'] = 'Vis taggrupper som separate felter';
