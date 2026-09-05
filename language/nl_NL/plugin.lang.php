@@ -23,3 +23,6 @@
 $lang['show tag groups'] = 'Toon label-groepen';
 $lang['Hide'] = 'Verberg';
 $lang['See more'] = 'Toon meer';
+$lang['Show tag groups as separate fields'] = 'Taggroepen als afzonderlijke velden weergeven';
+$lang['Show group filters on the tags page'] = 'Groepsfilters weergeven op de tagpagina';
+$lang['General'] = 'Algemeen';
